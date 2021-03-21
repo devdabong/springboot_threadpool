@@ -1,0 +1,47 @@
+spring:
+  datasource1:
+#         driver-class-name: com.mysql.cj.jdbc.Driver
+#         jdbc-url: jdbc:mysql://localhost:3306/db_weather?useSSL=false
+         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+         jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/db_weather?useSSL=false
+         username: root
+         password: jeong8300
+         initial-size: 20
+         min-idle: 20
+         max-idle: 20
+         max-active: 20
+         max-wait: 3000
+         pool-prepared-statements: true
+         default-auto-commit: false
+         validation-query: SELECT 1
+         test-on-borrow: false
+         test-on-return: false
+         test-while-idle: true
+         time-between-eviction-runs-millis: 3600000
+         jmx-enabled: false
+  datasource2:
+#         driver-class-name: com.mysql.cj.jdbc.Driver
+#         jdbc-url: jdbc:mysql://localhost:3306/db_weather2?useSSL=false
+         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+         jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/db_weather2?useSSL=false
+         username: root
+         password: jeong8300
+         initial-size: 20
+         min-idle: 20
+         max-idle: 20
+         max-active: 20
+         max-wait: 3000
+         pool-prepared-statements: true
+         default-auto-commit: false
+         validation-query: SELECT 1
+         test-on-borrow: false
+         test-on-return: false
+         test-while-idle: true
+         time-between-eviction-runs-millis: 3600000
+         jmx-enabled: false
+
+  profiles:    active: local
+    
+#logging:#  level:#    root: info 
+    
+  

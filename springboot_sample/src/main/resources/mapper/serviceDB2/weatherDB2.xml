@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wideshot.alimtalk.dao2.Weather2Mapper">
+	
+	<select id="selectWeatherList" resultType="com.wideshot.alimtalk.model.WeatherVO">
+		SELECT  *
+		  FROM  TB_WEATHER
+	</select>
+	
+	<insert id="insertWeather" parameterType="com.wideshot.alimtalk.model.WeatherVO">
+	 INSERT INTO TB_WEATHER 
+	 (
+		  TEMP_LON
+		, TEMP_LAT
+		, CUR_WEATHER
+		, DESCRIPTION
+		, CUR_TEMP
+		, FEEL_TEMP
+		, CUR_HUMIDITY
+		, COUNTRY
+		, CITY
+		, TEMP_DATE
+	 )
+	 VALUES
+	 (
+	 	  #{tempLon}
+	 	, #{tempLat}
+	 	, #{curWeather}
+	 	, #{description}
+	 	, #{curTemp}
+	 	, #{feelTemp}
+	 	, #{curHumidity}
+	 	, #{country}
+	 	, #{city}
+	 	,now()
+	 );
+	</insert>
+	
+	<update id="updateWeatherInfo" parameterType="com.wideshot.alimtalk.model.WeatherVO">
+	UPDATE
+		TB_WEATHER
+	SET
+		ETC_CODE = 200
+	WHERE
+		CITY = #{city}
+	</update>
+</mapper>

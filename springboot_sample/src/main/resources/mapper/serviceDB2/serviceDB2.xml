@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wideshot.alimtalk.dao.Service2Mapper">
+	
+	<!-- status가 승인, 검수요청이 아닌 경우 -->
+	<select id="selectTemplateApiExceptCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TB_ALIMTALK_TEMPLATE
+		WHERE
+			template_status IN ('DELETE', 'REJECT', 'SEJONGREJECT', 'WAITING', 'SAVE', 'REQUEST')
+		AND 
+			(template_category_code = '' OR template_category_code IS NULL)
+	</select>
+	
+	<select id="selectTemplateApiExceptList" resultType="AllimTalkTemplateVO">
+		SELECT
+			template_idx, 
+			template_profile_key,
+			template_code,
+			template_status,
+			sender_key_type
+		FROM 
+			TB_ALIMTALK_TEMPLATE
+		WHERE  
+			template_status IN ('DELETE', 'REJECT', 'SEJONGREJECT', 'WAITING', 'SAVE', 'REQUEST')
+		AND
+			(template_category_code = '' OR template_category_code IS NULL)
+	</select>
+	
+	<!-- status가 승인, 검수요청일 경우 -->
+	<select id="selectTemplateApiList" resultType="AllimTalkTemplateVO">
+		SELECT
+			template_idx, 
+			template_profile_key,
+			template_code,
+			template_status,
+			sender_key_type,
+			template_category_code
+		FROM 
+			TB_ALIMTALK_TEMPLATE
+		WHERE  
+			template_status = 'APPROVAL'
+	</select>
+	
+	<update id="updateTemplateCategoryCode" parameterType="AllimTalkTemplateVO">
+		UPDATE 
+			TB_ALIMTALK_TEMPLATE 
+		SET 
+			template_category_code = #{templateCategoryCode} 
+		WHERE 
+			template_idx = #{templateIdx}
+	</update>
+	
+</mapper>
